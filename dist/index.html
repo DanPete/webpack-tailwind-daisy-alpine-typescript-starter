@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full" data-theme="cupcake">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Understand Typescript</title>
+    <script src="bundle.js" defer></script>
+  </head>
+  <body class="h-full bg-gray-200">
+    <div class="container flex flex-col items-center h-full p-4 mx-auto">
+      <div x-data class="w-1/2">
+        <button
+          @click="$store.dropdown.toggle()"
+          class="block mx-auto btn"
+          :class="$store.dropdown.open ? 'btn-active' : 'btn-primary'"
+        >
+          Expand
+        </button>
+
+        <div
+          x-show="$store.dropdown.open"
+          class="px-6 py-4 mt-4 text-center bg-white shadow-2xl card"
+        >
+          <span>Content ...</span>
+          <span x-show="$store.show">Secret</span>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <div x-data="counter">
+          <button
+            @click="decrement"
+            class="btn btn-primary"
+            :disabled="count <= 0"
+          >
+            Sub
+          </button>
+          <button
+            @click="reset"
+            class="btn btn-primary"
+            :disabled="count === 0"
+          >
+            Reset
+          </button>
+          <button @click="increment(1)" class="btn btn-primary">Add</button>
+
+          <span
+            x-text="count"
+            class="block w-12 p-4 mx-auto mt-4 text-lg font-medium text-center text-white bg-gray-700 shadow-xl  rounded-xl"
+          ></span>
+
+          <form @submit.prevent>
+            <input
+              type="number"
+              x-model="customNumber"
+              class="block w-20 mx-auto mt-4 text-lg font-medium text-center  input input-bordered"
+            />
+            <button
+              @click="increment(parseInt(customNumber))"
+              class="block mx-auto mt-4 btn btn-primary"
+              type="submit"
+            >
+              <span
+                x-text="customNumber <= -1 ? 'Sub' : customNumber >= 1 ? 'Add' : 'Enter a number'"
+              ></span>
+              <span
+                x-show="customNumber !== 0 && customNumber !== '0'"
+                x-text="customNumber"
+              ></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
